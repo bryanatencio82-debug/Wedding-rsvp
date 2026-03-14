@@ -25,12 +25,12 @@ color:white;
 }
 
 .header h1{
-font-size:40px;
+font-size:34px;
 margin-bottom:10px;
 }
 
 .container{
-max-width:500px;
+max-width:460px;
 margin:20px auto;
 background:white;
 padding:25px;
@@ -141,6 +141,13 @@ transform:scale(1.05);
 opacity:1;
 }
 
+#guestCounter{
+font-size:22px;
+font-weight:bold;
+color:#ff4081;
+text-align:center;
+}
+
 
 </style>
 
@@ -156,6 +163,11 @@ opacity:1;
 
 <p class="countdown" id="countdown"></p>
 
+</div>
+
+<div class="container">
+<h2>🎉 Guest Confirmations</h2>
+<p id="guestCounter">Loading guest count...</p>
 </div>
 
 <div class="container">
@@ -299,6 +311,21 @@ buttons.forEach(btn => {
     // Save the value to hidden input for form submission
     hiddenInput.value = btn.dataset.value;
   });
+});
+
+</script>
+
+<script>
+
+fetch("https://script.google.com/macros/s/AKfycbzs5i7nhfNKnXSovmsg_00hH4AGuUd7-5s8p_3sc_o4ZcDFI6PihASQu3y5lwdYHO29xw/exec")
+.then(response => response.json())
+.then(data => {
+document.getElementById("guestCounter").innerText =
+data.guests + " Guests Confirmed 🎉";
+})
+.catch(error => {
+document.getElementById("guestCounter").innerText =
+"Unable to load guest count";
 });
 
 </script>
