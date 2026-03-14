@@ -1,159 +1,220 @@
 <!DOCTYPE html>
-‎<html>
-‎<head>
-‎
-‎<title>Bryan's Birthday RSVP</title>
-‎
-‎<style>
-‎
-‎body{
-‎font-family: Arial;
-‎background:#f2f2f2;
-‎text-align:center;
-‎padding:40px;
-‎}
-‎
-‎.container{
-‎background:white;
-‎max-width:500px;
-‎margin:auto;
-‎padding:30px;
-‎border-radius:10px;
-‎box-shadow:0 0 10px rgba(0,0,0,0.1);
-‎}
-‎
-‎input,select{
-‎width:90%;
-‎padding:10px;
-‎margin:10px;
-‎}
-‎
-‎button{
-‎background:#ff4d6d;
-‎color:white;
-‎border:none;
-‎padding:12px;
-‎width:95%;
-‎font-size:16px;
-‎cursor:pointer;
-‎}
-‎
-‎button:hover{
-‎background:#ff1f4b;
-‎}
-‎
-‎</style>
-‎
-‎</head>
-‎
-‎<body>
-‎
-‎<div class="container">
-‎
-‎<h2>🎉 Bryan's Birthday Party 🎂</h2>
-‎
-‎<p id="countdown"></p>
-‎
-‎<p>Date: May 10, 2026</p>
-‎
-‎<button onclick="openMap()">📍 Open Event Location</button>
-‎
-‎<hr>
-‎
-‎<h3>RSVP Confirmation</h3>
-‎
-‎<form id="rsvpForm">
-‎
-‎<input id="name" type="text" placeholder="Your Name" required>
-‎
-‎<select id="attendance" required>
-‎<option value="">Will you attend?</option>
-‎<option>Yes, I will attend</option>
-‎<option>Sorry, I cannot attend</option>
-‎</select>
-‎
-‎<input id="guests" type="number" placeholder="Number of guests" min="1" max="5">
-‎
-‎<button type="submit">Confirm RSVP</button>
-‎
-‎</form>
-‎
-‎<p id="message"></p>
-‎
-‎<hr>
-‎
-‎<h3>Upload Party Photos</h3>
-‎
-‎<p>You can upload photos after the party</p>
-‎
-‎<input type="file" multiple>
-‎
-‎</div>
-‎
-‎<script>
-‎
-‎/* COUNTDOWN TIMER */
-‎
-‎var eventDate = new Date("May 10, 2026 17:00:00").getTime();
-‎
-‎var timer = setInterval(function(){
-‎
-‎var now = new Date().getTime();
-‎
-‎var distance = eventDate - now;
-‎
-‎var days = Math.floor(distance / (1000*60*60*24));
-‎
-‎var hours = Math.floor((distance % (1000*60*60*24))/(1000*60*60));
-‎
-‎document.getElementById("countdown").innerHTML =
-‎"🎉 Party starts in: "+days+" days "+hours+" hours";
-‎
-‎},1000);
-‎
-‎/* GOOGLE MAP BUTTON */
-‎
-‎function openMap(){
-‎
-‎window.open("https://maps.google.com?q=YOUR+LOCATION");
-‎
-‎}
-‎
-‎/* RSVP FORM */
-‎
-‎document.getElementById("rsvpForm").addEventListener("submit",function(e){
-‎
-‎e.preventDefault();
-‎
-‎var name = document.getElementById("name").value;
-‎var attendance = document.getElementById("attendance").value;
-‎var guests = document.getElementById("guests").value;
-‎
-‎/* SEND DATA TO GOOGLE SHEETS */
-‎
-‎fetch("YOUR_SCRIPT_URL",{
-‎
-‎method:"POST",
-‎
-‎body:JSON.stringify({
-‎
-‎name:name,
-‎
-‎attendance:attendance,
-‎
-‎guests:guests
-‎
-‎})
-‎
-‎});
-‎
-‎document.getElementById("message").innerHTML =
-‎"✅ Thank you! Your RSVP has been recorded.";
-‎
-‎});
-‎
-‎</script>
-‎
-‎</body>
-‎
-‎</html>
+<html>
+
+<head>
+
+<title>Bryan's Birthday RSVP</title>
+
+<style>
+
+body{
+font-family: Arial, sans-serif;
+background: linear-gradient(135deg,#ff758c,#ff7eb3);
+margin:0;
+padding:0;
+color:#333;
+}
+
+.header{
+text-align:center;
+padding:60px 20px;
+color:white;
+}
+
+.header h1{
+font-size:40px;
+margin-bottom:10px;
+}
+
+.container{
+max-width:500px;
+margin:auto;
+background:white;
+padding:30px;
+border-radius:12px;
+box-shadow:0 10px 25px rgba(0,0,0,0.15);
+margin-bottom:40px;
+}
+
+.countdown{
+font-size:18px;
+margin:10px 0 20px 0;
+}
+
+button{
+background:#ff4d6d;
+border:none;
+color:white;
+padding:12px;
+width:100%;
+font-size:16px;
+border-radius:6px;
+cursor:pointer;
+margin-top:10px;
+}
+
+button:hover{
+background:#ff1f4b;
+}
+
+input,select{
+width:100%;
+padding:10px;
+margin-top:10px;
+border-radius:6px;
+border:1px solid #ccc;
+}
+
+.section-title{
+font-size:22px;
+margin-top:10px;
+}
+
+.map-button{
+background:#4CAF50;
+}
+
+.map-button:hover{
+background:#3e8e41;
+}
+
+.footer{
+text-align:center;
+color:white;
+padding:20px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+
+<h1>🎉 Bryan's Birthday Party 🎂</h1>
+
+<p>You're invited to celebrate!</p>
+
+<p class="countdown" id="countdown"></p>
+
+</div>
+
+<div class="container">
+
+<h2 class="section-title">📍 Event Location</h2>
+
+<p>Calbayog City, Samar</p>
+
+<button class="map-button" onclick="openMap()">
+Open in Google Maps
+</button>
+
+</div>
+
+<div class="container">
+
+<h2 class="section-title">📝 RSVP Confirmation</h2>
+
+<form id="rsvpForm">
+
+<input id="name" type="text" placeholder="Your Name" required>
+
+<select id="attendance" required>
+<option value="">Will you attend?</option>
+<option>Yes, I will attend</option>
+<option>Sorry, I cannot attend</option>
+</select>
+
+<input id="guests" type="number" placeholder="Number of guests" min="1" max="5">
+
+<button type="submit">Confirm RSVP</button>
+
+</form>
+
+<p id="message"></p>
+
+</div>
+
+<div class="container">
+
+<h2 class="section-title">📷 Upload Party Photos</h2>
+
+<p>Share your memories after the party!</p>
+
+<input type="file" multiple>
+
+</div>
+
+<div class="footer">
+
+<p>🎂 See you at the party! 🎉</p>
+
+</div>
+
+<script>
+
+/* COUNTDOWN TIMER */
+
+var eventDate = new Date("May 10, 2026 17:00:00").getTime();
+
+setInterval(function(){
+
+var now = new Date().getTime();
+
+var distance = eventDate - now;
+
+var days = Math.floor(distance/(1000*60*60*24));
+
+var hours = Math.floor((distance%(1000*60*60*24))/(1000*60*60));
+
+document.getElementById("countdown").innerHTML =
+"Party begins in "+days+" days "+hours+" hours";
+
+},1000);
+
+
+/* GOOGLE MAP BUTTON */
+
+function openMap(){
+
+window.open(
+"https://maps.google.com?q=Calbayog+City+Samar"
+);
+
+}
+
+
+/* RSVP FORM */
+
+document.getElementById("rsvpForm").addEventListener("submit",function(e){
+
+e.preventDefault();
+
+var name = document.getElementById("name").value;
+var attendance = document.getElementById("attendance").value;
+var guests = document.getElementById("guests").value;
+
+fetch("https://script.google.com/macros/s/AKfycbwXPciJfkmH5-hMIaMF-UVQoP8mwMFAxpBtg4NbZrH2bdg1OI5R1HyZu0cSCwEPzELT/exec",{
+
+method:"POST",
+
+body:JSON.stringify({
+
+name:name,
+attendance:attendance,
+guests:guests
+
+})
+
+});
+
+document.getElementById("message").innerHTML =
+"✅ Thank you! Your RSVP has been recorded.";
+
+});
+
+</script>
+
+</body>
+</html>
