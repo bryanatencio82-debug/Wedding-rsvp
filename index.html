@@ -116,6 +116,7 @@ border-radius:8px;
 cursor:pointer;
 transition:0.2s;
 color:white;
+opacity:0.8;
 }
 
 .attendance-btn[data-value="Yes"]{
@@ -127,12 +128,13 @@ background:#dc3545; /* red */
 }
 
 .attendance-btn:hover{
-opacity:0.85;
+opacity:1;
 }
 
 .attendance-btn.selected{
-box-shadow:0 0 10px rgba(0,0,0,0.3);
+box-shadow:0 0 10px rgba(0,0,0,0.5);
 transform:scale(1.05);
+opacity:1;
 }
 
 
@@ -184,7 +186,6 @@ Open in Google Maps
 <input type="hidden" id="attendance" required>
 
 </div>
-
 <input id="guests" type="number" placeholder="Number of guests" min="1" max="5">
 
 <button type="submit">Confirm</button>
@@ -284,6 +285,20 @@ guests:guests
 document.getElementById("message").innerHTML =
 "✅ Thank you! Your RSVP has been recorded.";
 
+});
+
+const buttons = document.querySelectorAll(".attendance-btn");
+const hiddenInput = document.getElementById("attendance");
+
+buttons.forEach(btn => {
+  btn.addEventListener("click", () => {
+    // Remove 'selected' from all buttons
+    buttons.forEach(b => b.classList.remove("selected"));
+    // Add 'selected' to clicked button
+    btn.classList.add("selected");
+    // Save the value to hidden input for form submission
+    hiddenInput.value = btn.dataset.value;
+  });
 });
 
 </script>
