@@ -199,7 +199,7 @@ Open in Google Maps
   <button type="button" class="attendance-btn" data-value="No">❌ Sorry, I cannot attend</button>
 </div>
 
-<input type="hidden" id="attendance" required>
+<input type="hidden" name="attendance" id="attendance" required>
 
 </div>
 <input id="guests" type="number" placeholder="Number of guests" min="1" max="5">
@@ -317,11 +317,11 @@ buttons.forEach(btn => {
 
 <script>
 
-fetch("https://script.google.com/macros/s/AKfycbx-Dw0FMqBZsBmcL6jXWLxq6PyQCBZEmSUEoWBdVTw6pTPZBr8EepKhFXM57SNbEj0S8g/exec")
+fetch("https://script.google.com/macros/s/AKfycbx7uAKFbkiM4pKPLi8mM_snBs8UrZZgsrYaOo1Zf4Z7vAOjA6yF5ttY9koMzX6bjrQ0eg/exec")
 .then(response => response.json())
 .then(data => {
 document.getElementById("guestCounter").innerText =
-data.guests + " Guests Confirmed 🎉";
+data.count + " Guests Confirmed 🎉";
 })
 .catch(error => {
 document.getElementById("guestCounter").innerText =
