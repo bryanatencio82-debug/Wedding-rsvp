@@ -120,11 +120,19 @@ Open in Google Maps
 
 <input id="name" type="text" placeholder="Your Name" required>
 
-<select id="attendance" required>
-<option value="">Will you attend?</option>
-<option>Yes, I will attend</option>
-<option>Sorry, I cannot attend</option>
-</select>
+<p><strong>Will you attend?</strong></p>
+
+<label>
+<input type="radio" name="attendance" value="Yes" required>
+Yes, I will attend 🎉
+</label>
+
+<br><br>
+
+<label>
+<input type="radio" name="attendance" value="No">
+Sorry, I cannot attend
+</label>
 
 <input id="guests" type="number" placeholder="Number of guests" min="1" max="5">
 
@@ -192,7 +200,8 @@ document.getElementById("rsvpForm").addEventListener("submit",function(e){
 e.preventDefault();
 
 var name = document.getElementById("name").value;
-var attendance = document.getElementById("attendance").value;
+var attendance =
+document.querySelector('input[name="attendance"]:checked').value;
 var guests = document.getElementById("guests").value;
 
 fetch("https://script.google.com/macros/s/AKfycbwHj8cpMDfC8k7GTnXMf4I5Cwxk-9ecQ-iqTFc_CKBd1Dw4_Cu8g_n6P3NBKURf7hJo8Q/exec",{
